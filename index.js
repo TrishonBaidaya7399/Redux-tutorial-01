@@ -4,6 +4,8 @@
 // 3. reducer
 // 4. store
 
+const {createStore} = require("redux")
+
 //<-----------Defining constant-------------->
 const INCREMENT = "INCREMENT"
 const DECREMENT = "DECREMENT"
@@ -76,3 +78,15 @@ const counterReducer = (state= initialCounterState, action)=>{
 
 }
 
+//<-----------------Store------------------->
+//The mail responsibility of store is to maintain and hold the state
+//Three important methods - getState(), dispatch(), subscribe()
+
+//Create store
+const store = createStore(counterReducer)
+store.subscribe(()=>{
+    console.log(store.getState());
+})
+
+//dispatch actions
+store.dispatch(incrementCounter());

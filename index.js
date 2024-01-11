@@ -1,10 +1,17 @@
-//Defining constant
+//Steps:
+// 1. state declare
+// 2. dispatch action
+// 3. reducer
+// 4. store
+
+//<-----------Defining constant-------------->
 const INCREMENT = "INCREMENT"
 const DECREMENT = "DECREMENT"
 const ADD_USER = "ADD_USER"
+
 //<------------------STATS------------------->
 //We are using redux mainly to manage the state globally
-const initialCounter = {
+const initialCounterState = {
   count: 0,
 };
 const initialUsers = {
@@ -20,6 +27,7 @@ return {
     type: INCREMENT
 }; 
 }
+
 //option 01: by getting user data as a prop
 // const addUser=(user)=>{
 // return {
@@ -27,6 +35,7 @@ return {
 //     payload: {user}
 // }; 
 // }
+
 //option 02: Defining the user 
 const addUser=()=>{
 return {
@@ -41,3 +50,29 @@ return {
     type: DECREMENT
 }; 
 }
+
+//<-----------------Create reducer for counter------------------->
+//Reducer is a pure function, that means it take some input and provide an output based on the input. based on the type of the action it update the state
+const counterReducer = (state= initialCounterState, action)=>{
+    switch (action.type) {
+        case INCREMENT:
+            return {
+                //getting all the property and only update the count
+                ...state, 
+                count: state.count + 1
+            }
+            case DECREMENT:
+            return {
+                //getting all the property and only update the count
+                ...state, 
+                count: state.count - 1
+            }
+            
+            break;
+    
+        default:
+            state;
+    }
+
+}
+

@@ -105,13 +105,21 @@ const INCREMENT = "INCREMENT"
 const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE"
 const DECREMENT = "DECREMENT"
 const RESET = "RESET"
+const ADD_USER = "ADD_USER"
 
 //state
 const initialCounterState = {
-    count: 0
+    users: ["Trishon"],
+    count: 1
 }
 
 //action 
+const addUser = (user)=>{
+    return {
+        type: ADD_USER,
+        payload: user
+    }
+}
 const incrementCounterAction = ()=>{
     return {
         type: INCREMENT
@@ -135,6 +143,18 @@ const resetCounterAction = ()=>{
 }
 
 //reducer
+const userReducer = (state = initialCounterState, action)=>{
+switch (action.type) {
+    case ADD_USER:
+        return {
+            users: [...state.users, action.payload],
+            count: state.count + 1
+        }
+
+    default:
+        return state;
+}
+}
 const counterReducer=(state= initialCounterState, action)=>{
     switch (action.type) {
         case INCREMENT:
@@ -161,6 +181,10 @@ const counterReducer=(state= initialCounterState, action)=>{
 
 //store
 
+const storeUser = createStore(userReducer)
+    storeUser.subscribe(()=>{
+        console.log(storeUser.getState());
+    })
 const store = createStore(counterReducer)
     store.subscribe(()=>{
         console.log(store.getState());
@@ -174,3 +198,4 @@ store.dispatch(resetCounterAction());
 store.dispatch(incrementCounterAction());
 store.dispatch(incrementCounterByValue(10));
 store.dispatch(incrementCounterByValue(20));
+storeUser.dispatch(addUser("Shuvo"));

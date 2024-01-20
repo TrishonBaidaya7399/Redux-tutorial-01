@@ -3,7 +3,7 @@
  * Step 01: install redux-logger
  * step 02: import applyMiddleware from redux
  * step 03: use applyMiddleware(logger) inside the store function after declaring the reducer function 
- * */ 
+ */ 
 
 const { createStore, combineReducers,applyMiddleware } = require("redux");
 const { default: logger } = require("redux-logger");
